@@ -3,6 +3,8 @@ import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(XylophoneApp());
 
+final globalPlayer = AudioCache();
+
 class XylophoneApp extends StatelessWidget {
   final List<int> numbers = [1, 2, 3, 4, 5, 6, 7];
 
@@ -43,8 +45,7 @@ class SoundButton extends StatelessWidget {
   SoundButton({this.number});
 
   void _playSound() {
-    final player = AudioCache();
-    player.play('note${this.number}.wav');
+    globalPlayer.play('note${this.number}.wav');
   }
 
   @override
