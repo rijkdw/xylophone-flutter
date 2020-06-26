@@ -10,11 +10,15 @@ class XylophoneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: numbers.map((i) {
-              return SoundButton(
-                number: i,
+              return Expanded(
+                child: SoundButton(
+                  number: i,
+                ),
               );
             }).toList(),
           ),
@@ -38,14 +42,16 @@ class SoundButton extends StatelessWidget {
 
   SoundButton({this.number});
 
+  void _playSound() {
+    final player = AudioCache();
+    player.play('note${this.number}.wav');
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       color: colors[this.number - 1],
-      onPressed: () {
-        final player = AudioCache();
-        player.play('note${this.number}.wav');
-      },
+      onPressed: () => this._playSound()
     );
   }
 }
